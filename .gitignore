@@ -1,0 +1,10 @@
+# Compiled binaries
+tema1
+*.o
+
+# Output files
+*.out
+tema1.out
+
+# Archives (optional, de obicei nu se pun arhive pe git)
+*.zip
