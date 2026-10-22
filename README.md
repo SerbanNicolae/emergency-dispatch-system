@@ -12,11 +12,9 @@ A command-driven **emergency dispatch simulator** written in C. It manages respo
 
 - [Features](#-features)
 - [Data Structures](#-data-structures)
-- [Architecture](#-architecture)
 - [Getting Started](#-getting-started)
 - [Input Format](#-input-format)
 - [Commands](#-commands)
-- [Example](#-example)
 
 ---
 
@@ -51,30 +49,6 @@ A command-driven **emergency dispatch simulator** written in C. It manages respo
   - puts the incident back at the **front** of its priority queue,
   - returns the unit to the **back** of the available units queue,
   - removes the intervention from the list.
-
----
-
-## 🏗 Architecture
-
-```
-.
-├── main.c            # Entry point: reads input and dispatches commands
-├── unit.h / unit.c   # Units: list, availability queue, display
-├── incident.h / .c   # Incidents: list, priority queues, input parsing
-├── intervention.h/.c # Interventions: list, undo stack, dispatch logic, cleanup
-└── Makefile
-```
-
-```mermaid
-flowchart LR
-    IN[tema1.in] --> MAIN[main.c]
-    MAIN --> U[unit]
-    MAIN --> I[incident]
-    MAIN --> V[intervention]
-    V --> U
-    V --> I
-    MAIN --> OUT[tema1.out]
-```
 
 ---
 
@@ -127,43 +101,3 @@ The program reads from `tema1.in` and writes results to `tema1.out`.
 | `SHOW_INTERVENTIONS` | – | Lists all interventions and their status |
 
 Invalid operations print `INVALID OPERATION! ERROR 404`.
-
----
-
-## 💡 Example
-
-**`tema1.in`**
-```
-3
-1 A
-2 P
-3 M
-9
-ADD_INCIDENT 101 low Small fire in a parking lot
-ADD_INCIDENT 102 high Car accident on the highway
-ADD_INCIDENT 103 medium Person trapped in elevator
-DISPATCH
-DISPATCH
-CHECK_UNITS_AVAILABILITY
-UNDO_LAST_DISPATCH
-SOLVED_INCIDENT 102
-SHOW_INTERVENTIONS
-```
-
-**`tema1.out`**
-```
-Number of available units: 1
-Incident 102 was assigned to unit 1, and has the following status: "solved"
-```
-
-**What happens:**
-1. The `high` incident (102) is dispatched first, then the `medium` one (103).
-2. One unit is left available.
-3. The undo reverts incident 103 and returns its unit to the queue.
-4. Incident 102 is solved, so only its intervention remains.
-
----
-
-## 👤 Author
-
-**Șerban Nicolae** – [@SerbanNicolae](https://github.com/SerbanNicolae)
