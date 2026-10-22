@@ -17,7 +17,7 @@ run: build
 
 # Pack the solution into a zip file.
 pack:
-	zip -FSr Serban-Nicolae-314CA.zip README Makefile *.c *.h
+	zip -FSr Serban-Nicolae-314CA.zip README.md Makefile *.c *.h
 
 # Clean the solution.
 clean:
